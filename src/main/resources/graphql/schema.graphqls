@@ -1,0 +1,20 @@
+type Users {
+    id: Int!
+    name: String!
+    email: String!
+    linkdin: String!
+    profil: String!
+    tags: [String!]
+}
+
+type Query {
+    findAllUsers: [Users]
+    findUsersByTag(tag:String!): [Users]
+    findUserById(id: Int!): Users
+}
+
+type Mutation {
+    createUser(name: String!, email: String!, linkdin: String!, profil: String!, tags: [String!]): Users
+    deleteUser(id: Int!): Users
+    updateUser(id: Int!, name: String!, email: String!, linkdin: String!, profil: String!, tags: [String!]): Users
+}
