@@ -33,6 +33,14 @@ jobs:
       uses: docker/setup-buildx-action@v3
     - name: Build Docker image
       run: docker build -t ordforandelista-backend .
+    - name: SonarQube Scan
+      uses: SonarSource/sonarcloud-github-action@v2
+      with:
+        projectBaseDir: .
+      env:
+       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
 
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
