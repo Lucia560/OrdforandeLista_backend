@@ -31,11 +31,12 @@ jobs:
       - name: Build and analyze with Sonar
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: >
-         mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-          -Dsonar.projectKey=Lucia560_OrdforandeLista_backend
-          -Dsonar.organization=lucia560
+        run: |
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.projectKey=Lucia560_OrdforandeLista_backend \
+          -Dsonar.organization=lucia560 \
           -Dsonar.host.url=https://sonarcloud.io
+
 
 
       - name: Set up Docker Buildx
