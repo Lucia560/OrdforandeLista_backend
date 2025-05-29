@@ -39,7 +39,7 @@ jobs:
        projectBaseDir: .
        args: 
          -Dsonar.organization=Lucia560-org
-         -Dsonar.projectKey=OrdforandeLista_backend
+         -Dsonar.projectKey=ordforandelista-backend
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
