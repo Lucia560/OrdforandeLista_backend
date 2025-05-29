@@ -38,8 +38,8 @@ jobs:
       with:
        projectBaseDir: .
        args: 
-         -Dsonar.organization=ordforande-org
-         -Dsonar.projectKey=ordforande-backend
+         -Dsonar.organization=Lucia560-org
+         -Dsonar.projectKey=OrdforandeLista_backend
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
