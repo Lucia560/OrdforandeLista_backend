@@ -2,10 +2,7 @@ package com.example.OrdforandeLista.entities;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.HashSet;
@@ -17,6 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
 public class UserProfile {
 
@@ -24,6 +22,7 @@ public class UserProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
+
 
 
     @Column(nullable = false,length = 50)
@@ -72,6 +71,6 @@ public class UserProfile {
              joinColumns = @JoinColumn(name = "user_id"),
              inverseJoinColumns = @JoinColumn(name = "tag_id")
      )
-     private Set<Tag> tags = new HashSet<>();
+     private Set<Tag> tag = new HashSet<>();
 
 }

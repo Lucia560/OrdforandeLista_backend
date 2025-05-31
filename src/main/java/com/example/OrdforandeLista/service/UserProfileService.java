@@ -44,7 +44,7 @@ public class UserProfileService {
             dbUserProfile.setBoardRoles(userProfile.getBoardRoles());
             dbUserProfile.setCompanyTypes(userProfile.getCompanyTypes());
             dbUserProfile.setKeyCompetencies(userProfile.getKeyCompetencies());
-            dbUserProfile.setTags(userProfile.getTags());
+            dbUserProfile.setTag(userProfile.getTag());
             return userProfileRepository.save(dbUserProfile);
 
            }).orElseThrow(()->new IllegalArgumentException("Kunde inte hitta användaren"));
