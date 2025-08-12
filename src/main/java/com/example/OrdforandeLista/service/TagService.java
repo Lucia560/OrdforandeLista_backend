@@ -19,8 +19,8 @@ public class TagService {
     }
 
     public Tag createTag(Tag tag) {
-        if (tagRepository.existsByTagName(tag.getTagName())) {
-            throw new IllegalArgumentException("Tag with name '" + tag.getTagName() + "' already exists");
+        if (tagRepository.existsByName(tag.getName())) {
+            throw new IllegalArgumentException("Tag with name '" + tag.getName() + "' already exists");
         }
         return tagRepository.save(tag);
     }
@@ -35,14 +35,18 @@ public class TagService {
 
     public Tag updateTag(Long id, Tag tag) {
         return tagRepository.findById(id).map(dbTag -> {
-            dbTag.setTagName(tag.getTagName());
+            dbTag.setName(tag.getName());
             return tagRepository.save(dbTag);
         }).orElseThrow(()-> new IllegalArgumentException("Kunde inte hitta taggen"));
 
     }
 
-    public List<Tag> getTagsByIds(List<Long> ids) {
-        return tagRepository.findAllById(ids);
-    }
+//    public List<Tag> getTagsByIds(List<Long> ids) {
+//        return tagRepository.findAllById(ids);
+//    }
+public List<Tag> getTagsByIds(List<Long> ids) {
+    if (ids == null || ids.isEmpty()) return List.of();
+    return  tagRepository.findAllById(ids);
+}
 
 }

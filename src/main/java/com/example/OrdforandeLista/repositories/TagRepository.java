@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface TagRepository extends ListCrudRepository<Tag, Long> {
 
-    List<Tag> findAllByTagName(String tagName);
-    boolean existsByTagName(String tagName);
+    List<Tag> findAllByName(String name);
+    boolean existsByName(String name);
 
 
 }

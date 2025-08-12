@@ -18,8 +18,8 @@ type UserProfile {
     agreedToTerms: Boolean!
     boardRoles: [String!]
     companyTypes: [String!]
-    keyCompetencies: [String!]
-    tags: [Tag!]!
+    keyCompetencies: [Tag!]!
+
 }
 
 type Tag {
