@@ -1,51 +1,47 @@
 package com.example.OrdforandeLista.entities;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Entity
+@Table(name = "user_profile")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
+@Builder
 public class UserProfile {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id") // matches join table column
     private Long user_id;
 
-
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, length = 50)
     private String firstName;
 
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, length = 50)
     private String lastName;
 
-
-    @Column(nullable = false,length = 50)
+    @Column(nullable = false, length = 50)
     private String email;
 
-    @Column(nullable = false,length = 200)
+    @Column(nullable = false, length = 200)
     private String linkedInUrl;
 
-    @Column(nullable = false,length = 200)
+    @Column(nullable = false, length = 200)
     private String profilePictureUrl;
 
-    @Column(nullable = false,length = 500)
+    @Column(nullable = false, length = 500)
     private String profilePitch;
 
-    @Column( nullable = false)
+    @Column(nullable = false)
     private Boolean hasBoardEducation;
 
     @Column
@@ -54,24 +50,46 @@ public class UserProfile {
     @Column
     private Integer executiveExperienceYears;
 
-    @Column( length = 100)
+    @Column(length = 100)
     private String leadershipPosition;
 
     @ElementCollection
+    @CollectionTable(name = "user_profile_board_roles", joinColumns = @JoinColumn(name = "user_id"))
     private List<String> boardRoles;
 
     @ElementCollection
+    @CollectionTable(name = "user_profile_company_types", joinColumns = @JoinColumn(name = "user_id"))
     private List<String> companyTypes;
 
-    @ElementCollection
-    private List<String> keyCompetencies;
+    @Column(length = 50)
+    private String phoneNumber;
 
-    @ManyToMany
-     @JoinTable(
-             name = "users_tags",
-             joinColumns = @JoinColumn(name = "user_id"),
-             inverseJoinColumns = @JoinColumn(name = "tag_id")
-     )
-     private Set<Tag> tags = new HashSet<>();
+    @Column(length = 100)
+    private String company;
 
+    @Column(length = 100)
+    private String currentPosition;
+
+    @Column(nullable = false)
+    private Boolean hasLeadershipEducation;
+
+    @Column(length = 500)
+    private String leadershipEducationDescription;
+
+    @Column
+    private Integer leadershipExperienceYears;
+
+    @Column(nullable = false)
+    private Boolean agreedToTerms;
+
+    // ✅ Key competencies are the tags
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_profile_key_competencies",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tag> keyCompetencies = new HashSet<>();
 }
+
