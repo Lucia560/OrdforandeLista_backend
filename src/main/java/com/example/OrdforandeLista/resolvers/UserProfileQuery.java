@@ -4,9 +4,10 @@ import com.example.OrdforandeLista.entities.UserProfile;
 import com.example.OrdforandeLista.repositories.UserProfileRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-
+import org.springframework.stereotype.Controller;
 import java.util.List;
 
+@Controller
 public class UserProfileQuery {
 
     private UserProfileRepository userProfileRepository;
@@ -24,7 +25,7 @@ public class UserProfileQuery {
 
     @QueryMapping
     public List<UserProfile> findUsersByTag(@Argument String tag) {
-        return userProfileRepository.findAllByKeyCompetencies_TagName(tag);
+        return userProfileRepository.findAllByKeyCompetencies_Name(tag);
     }
 
     @QueryMapping

@@ -20,8 +20,8 @@ public class UserProfile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id") // matches join table column
-    private Long user_id;
+    @Column(name = "id")
+    private Long id;
 
     @Column(nullable = false, length = 50)
     private String firstName;
@@ -35,7 +35,7 @@ public class UserProfile {
     @Column(nullable = false, length = 200)
     private String linkedInUrl;
 
-    @Column(nullable = false, length = 200)
+    @Column(length = 200)
     private String profilePictureUrl;
 
     @Column(nullable = false, length = 500)

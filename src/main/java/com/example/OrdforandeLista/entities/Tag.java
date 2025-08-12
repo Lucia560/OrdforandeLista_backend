@@ -18,10 +18,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long tag_id;
+    private Long id;
 
     @Column
-    private String tagName;
+    private String name;
 
 
 }
