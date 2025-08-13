@@ -1,5 +1,5 @@
 type UserProfile {
-    id: ID!
+    userId: ID!
     firstName: String!
     lastName: String!
     email: String!
@@ -23,7 +23,7 @@ type UserProfile {
 }
 
 type Tag {
-    id: ID!
+    tagId: ID!
     name: String!
 }
 
@@ -41,7 +41,7 @@ input RegisterUserProfileInput {
     leadershipEducationDescription: String
     boardRoles: [String!]
     companyTypes: [String!]
-    keyCompetencyIds: [ID!]
+    keyCompetencyIds: [ID!]!
     boardExperienceYears: Int
     executiveExperienceYears: Int
     leadershipExperienceYears: Int
@@ -52,12 +52,12 @@ input RegisterUserProfileInput {
 type Query {
     findAllUsers: [UserProfile]
     findUsersByTag(tag: String!): [UserProfile]
-    findUserById(id: ID!): UserProfile
+    findUserById(userId: ID!): UserProfile
     findUserByName(name: String!): UserProfile
 }
 
 type Mutation {
     createUser(input: RegisterUserProfileInput!): UserProfile
-    updateUser(id: ID!, input: RegisterUserProfileInput!): UserProfile
-    deleteUser(id: ID!): Boolean
+    updateUser(userId: ID!, input: RegisterUserProfileInput!): UserProfile
+    deleteUser(userId: ID!): Boolean
 }

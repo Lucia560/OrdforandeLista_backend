@@ -1,6 +1,7 @@
 package com.example.OrdforandeLista.repositories;
 
 import com.example.OrdforandeLista.entities.UserProfile;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,8 @@ public interface UserProfileRepository extends ListCrudRepository<UserProfile,Lo
     Optional<UserProfile> findByLastName(String lastName);
     List<UserProfile> findAllByKeyCompetencies_Name(String name);
     boolean existsByEmail(String email);
+
+    @NotNull
+    @Override
+    List<UserProfile> findAll();
 }
