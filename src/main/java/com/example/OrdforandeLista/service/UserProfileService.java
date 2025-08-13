@@ -50,15 +50,15 @@ public class UserProfileService {
         return userProfileRepository.save(user);
     }
 
-    public void deleteUser(Long id) {
-        if (!userProfileRepository.existsById(id)) {
-            throw new IllegalArgumentException("User with ID " + id + " does not exist");
+    public void deleteUser(Long userId) {
+        if (!userProfileRepository.existsById(userId)) {
+            throw new IllegalArgumentException("User with ID " + userId + " does not exist");
         }
-        userProfileRepository.deleteById(id);
+        userProfileRepository.deleteById(userId);
     }
 
-    public UserProfile updateUser(Long id, RegisterUserProfileInput input) {
-        return userProfileRepository.findById(id).map(user -> {
+    public UserProfile updateUser(Long userId, RegisterUserProfileInput input) {
+        return userProfileRepository.findById(userId).map(user -> {
             user.setFirstName(input.firstName());
             user.setLastName(input.lastName());
             user.setEmail(input.email());
@@ -83,7 +83,7 @@ public class UserProfileService {
 
             return userProfileRepository.save(user);
         }).orElseThrow(() ->
-                new IllegalArgumentException("User with ID " + id + " does not exist"));
+                new IllegalArgumentException("User with ID " + userId + " does not exist"));
     }
 }
 

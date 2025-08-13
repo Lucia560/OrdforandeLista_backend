@@ -10,7 +10,12 @@ import java.util.List;
 @Controller
 public class UserProfileQuery {
 
-    private UserProfileRepository userProfileRepository;
+    private final UserProfileRepository userProfileRepository;
+
+
+    public UserProfileQuery(UserProfileRepository userProfileRepository) {
+        this.userProfileRepository = userProfileRepository;
+    }
 
     @QueryMapping
     public List<UserProfile> findAllUsers() {
@@ -18,8 +23,8 @@ public class UserProfileQuery {
     }
 
     @QueryMapping
-    public UserProfile findUserById(@Argument Long id) {
-        return userProfileRepository.findById(id)
+    public UserProfile findUserById(@Argument Long userId) {
+        return userProfileRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 

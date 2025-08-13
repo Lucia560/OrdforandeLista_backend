@@ -25,16 +25,16 @@ public class TagService {
         return tagRepository.save(tag);
     }
 
-    public void deleteTag(Long id) {
-        if (!tagRepository.existsById(id)) {
-            throw new IllegalArgumentException("Tag with ID '" + id + "' does not exist");
+    public void deleteTag(Long tagId) {
+        if (!tagRepository.existsById(tagId)) {
+            throw new IllegalArgumentException("Tag with ID '" + tagId + "' does not exist");
         }
-        tagRepository.deleteById(id);
+        tagRepository.deleteById(tagId);
     }
 
 
-    public Tag updateTag(Long id, Tag tag) {
-        return tagRepository.findById(id).map(dbTag -> {
+    public Tag updateTag(Long tagId, Tag tag) {
+        return tagRepository.findById(tagId).map(dbTag -> {
             dbTag.setName(tag.getName());
             return tagRepository.save(dbTag);
         }).orElseThrow(()-> new IllegalArgumentException("Kunde inte hitta taggen"));

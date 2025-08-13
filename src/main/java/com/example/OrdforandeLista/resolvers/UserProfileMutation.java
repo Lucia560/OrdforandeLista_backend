@@ -28,13 +28,13 @@ public class UserProfileMutation {
     }
 
     @MutationMapping
-    public UserProfile updateUser(@Argument Long id, @Argument RegisterUserProfileInput input) {
-        return userProfileService.updateUser(id, input);
+    public UserProfile updateUser(@Argument Long userId, @Argument RegisterUserProfileInput input) {
+        return userProfileService.updateUser(userId, input);
     }
 
     @MutationMapping
-    public Boolean deleteUser(@Argument Long id) {
-        userProfileService.deleteUser(id);
+    public Boolean deleteUser(@Argument Long userId) {
+        userProfileService.deleteUser(userId);
         return true;
     }
 }
