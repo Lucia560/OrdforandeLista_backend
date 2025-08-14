@@ -27,7 +27,8 @@ public class UserProfileService {
         // Map keyCompetencyIds -> Set<Tag>
         Set<Tag> competencies = new HashSet<>(tagService.getTagsByIds(input.keyCompetencyIds()));
 
-        UserProfile user = UserProfile.builder()
+        UserProfile user = UserProfile
+                .builder()
                 .firstName(input.firstName())
                 .lastName(input.lastName())
                 .email(input.email())
