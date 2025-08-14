@@ -2,11 +2,11 @@ package com.example.OrdforandeLista.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "user_profile")
@@ -91,5 +91,25 @@ public class UserProfile {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private Set<Tag> keyCompetencies = new HashSet<>();
+
+//    @CreationTimestamp
+//    @Column(updatable = false, name = "created_at")
+//    private Date createdAt;
+//
+//    @UpdateTimestamp
+//    @Column(name = "updated_at")
+//    private Date updatedAt;
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
