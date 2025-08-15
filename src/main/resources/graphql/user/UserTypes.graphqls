@@ -1,0 +1,50 @@
+type UserProfile {
+    userId: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    phoneNumber: String!
+    company: String!
+    currentPosition: String
+    linkedInUrl: String!
+    profilePictureUrl: String!
+    profilePitch: String!
+    hasBoardEducation: Boolean!
+    hasLeadershipEducation: Boolean!
+    leadershipEducationDescription: String
+    boardExperienceYears: Int
+    executiveExperienceYears: Int
+    leadershipExperienceYears: Int
+    agreedToTerms: Boolean!
+    boardRoles: [String!]
+    companyTypes: [String!]
+    keyCompetencies: [Tag!]!
+
+}
+
+type Tag {
+    tagId: ID!
+    name: String!
+}
+
+input RegisterUserProfileInput {
+    firstName: String!
+    lastName: String!
+    email: String!
+    phoneNumber: String!
+    company: String!
+    currentPosition: String
+    linkedInUrl: String!
+    profilePitch: String!
+    hasBoardEducation: Boolean!
+    hasLeadershipEducation: Boolean!
+    leadershipEducationDescription: String
+    boardRoles: [String!]
+    companyTypes: [String!]
+    keyCompetencyIds: [ID!]!
+    boardExperienceYears: Int
+    executiveExperienceYears: Int
+    leadershipExperienceYears: Int
+    agreedToTerms: Boolean!
+    tagIds: [ID!]     # <--- let frontend send tag IDs to associate with user
+}

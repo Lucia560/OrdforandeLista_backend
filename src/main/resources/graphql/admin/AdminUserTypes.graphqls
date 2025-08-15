@@ -1,0 +1,16 @@
+type AdminUser {
+    id: ID!
+    email: String!
+    role: String!
+    password: String!
+}
+
+input AdminUserInput {
+    email: String!
+    password:String!
+}
+
+input AdminLoginInput {
+    email: String!
+    password: String!
+}

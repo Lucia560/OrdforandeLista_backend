@@ -7,7 +7,6 @@ import com.example.OrdforandeLista.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 @Controller
@@ -16,10 +15,12 @@ public class UserProfileMutation {
     private final UserProfileService userProfileService;
     private final TagService tagService;
 
+
     @Autowired
     public UserProfileMutation(UserProfileService userProfileService, TagService tagservice) {
         this.userProfileService = userProfileService;
         this.tagService = tagservice;
+
     }
 
     @MutationMapping(name = "createUser")
@@ -37,4 +38,5 @@ public class UserProfileMutation {
         userProfileService.deleteUser(userId);
         return true;
     }
+
 }

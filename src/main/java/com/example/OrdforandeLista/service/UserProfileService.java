@@ -5,7 +5,6 @@ import com.example.OrdforandeLista.entities.UserProfile;
 import com.example.OrdforandeLista.input.RegisterUserProfileInput;
 import com.example.OrdforandeLista.repositories.UserProfileRepository;
 import jakarta.transaction.Transactional;
-import lombok.Builder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -22,6 +21,8 @@ public class UserProfileService {
         this.userProfileRepository = userProfileRepository;
         this.tagService = tagService;
     }
+
+
 
     public UserProfile registerUser(RegisterUserProfileInput input) {
         // Map keyCompetencyIds -> Set<Tag>

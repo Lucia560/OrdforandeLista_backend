@@ -1,0 +1,4 @@
+extend type Query {
+    findAllAdminUsers: [AdminUser!]
+    findAdminUserByEmail(email: String!): AdminUser
+}

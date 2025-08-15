@@ -1,0 +1,5 @@
+extend type Mutation {
+    createAdminUser(input: AdminUserInput): AdminUser
+    updateAdminUser(id:ID!, input: AdminUserInput): AdminUser
+    deleteAdminUser(id:ID!): Boolean
+}

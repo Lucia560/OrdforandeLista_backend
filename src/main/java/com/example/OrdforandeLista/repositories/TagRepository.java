@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface TagRepository extends ListCrudRepository<Tag, Long> {
 
-    List<UserProfile> findAllByTag(Tag tag);
+    List<Tag> findAllByName(String name);
 
     boolean existsByName(String tagName);
 }

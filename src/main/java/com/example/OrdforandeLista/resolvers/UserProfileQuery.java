@@ -1,5 +1,6 @@
 package com.example.OrdforandeLista.resolvers;
 
+import com.example.OrdforandeLista.entities.AdminUser;
 import com.example.OrdforandeLista.entities.UserProfile;
 import com.example.OrdforandeLista.repositories.UserProfileRepository;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -12,9 +13,9 @@ public class UserProfileQuery {
 
     private final UserProfileRepository userProfileRepository;
 
-
     public UserProfileQuery(UserProfileRepository userProfileRepository) {
         this.userProfileRepository = userProfileRepository;
+
     }
 
     @QueryMapping
