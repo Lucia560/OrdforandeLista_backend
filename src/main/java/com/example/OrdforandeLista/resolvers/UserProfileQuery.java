@@ -12,9 +12,9 @@ public class UserProfileQuery {
 
     private final UserProfileRepository userProfileRepository;
 
-
     public UserProfileQuery(UserProfileRepository userProfileRepository) {
         this.userProfileRepository = userProfileRepository;
+
     }
 
     @QueryMapping

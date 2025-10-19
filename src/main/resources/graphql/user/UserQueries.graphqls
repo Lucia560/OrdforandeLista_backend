@@ -1,0 +1,6 @@
+extend type Query {
+    findAllUsers: [UserProfile]
+    findUsersByTag(tag: String!): [UserProfile]
+    findUserById(userId: ID!): UserProfile
+    findUserByName(name: String!): UserProfile
+}

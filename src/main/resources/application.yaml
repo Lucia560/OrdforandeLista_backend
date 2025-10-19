@@ -1,20 +1,38 @@
 spring:
-   datasource:
-     url: ${DB_URL}
-     username: ${DB_USER}
-     password: ${DB_PASSWORD}
-     driver-class-name: com.mysql.cj.jdbc.Driver
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
-   jpa:
+  jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
 
-   graphql:
-     graphiql:
-       enabled: true
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphiql
+    schema:
+      printer:
+        enabled: true
+    tools:
+      schema-location-pattern: "**/graphql/**/*.graphqls"
 
 server:
- port: 9001
+  port: 8080
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    org.springframework.graphql: DEBUG
+    com.example.OrdforandeLista: DEBUG
+
+jwt:
+  secret: your-256-bit-secret-make-it-very-secure
+  expiration-ms: 86400000
+  refresh-expiration-ms: 604800000
 
 

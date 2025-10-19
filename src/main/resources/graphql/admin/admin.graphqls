@@ -1,0 +1,49 @@
+# Admin User Type
+type AdminUser {
+    id: ID!
+    email: String!
+    role: String!
+    createdAt: DateTime
+    updatedAt: DateTime
+}
+
+# Input types
+input AdminUserInput {
+    email: String!
+    password: String!
+    role: String
+}
+
+input AdminLoginInput {
+    email: String!
+    password: String!
+}
+
+# Query type
+type Query {
+    # Admin User Queries
+    adminUsers: [AdminUser!]!
+    adminUser(id: ID!): AdminUser
+    currentUser: AdminUser
+    findAllAdminUsers: [AdminUser!]
+    findAdminUserByEmail(email: String!): AdminUser
+}
+
+
+
+# Mutation type
+type Mutation {
+    # Admin User Mutations
+    createAdminUser(input: AdminUserInput!): AdminUser!
+    updateAdminUser(id: ID!, input: AdminUserInput!): AdminUser!
+    deleteAdminUser(id: ID!): Boolean
+    
+    # Authentication
+    login(input: AdminLoginInput!): String!  # Returns JWT token
+    refreshToken(token: String!): String!    # Returns new JWT token
+}
+
+# Subscription type (if needed)
+type Subscription {
+    adminUserCreated: AdminUser!
+}

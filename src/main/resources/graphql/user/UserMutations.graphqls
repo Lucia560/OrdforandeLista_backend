@@ -1,0 +1,6 @@
+
+ extend type Mutation {
+    createUser(input: RegisterUserProfileInput!): UserProfile
+    updateUser(userId: ID!, input: RegisterUserProfileInput!): UserProfile
+    deleteUser(userId: ID!): Boolean
+}

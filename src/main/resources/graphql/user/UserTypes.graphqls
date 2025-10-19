@@ -48,16 +48,3 @@ input RegisterUserProfileInput {
     agreedToTerms: Boolean!
     tagIds: [ID!]     # <--- let frontend send tag IDs to associate with user
 }
-
-type Query {
-    findAllUsers: [UserProfile]
-    findUsersByTag(tag: String!): [UserProfile]
-    findUserById(userId: ID!): UserProfile
-    findUserByName(name: String!): UserProfile
-}
-
-type Mutation {
-    createUser(input: RegisterUserProfileInput!): UserProfile
-    updateUser(userId: ID!, input: RegisterUserProfileInput!): UserProfile
-    deleteUser(userId: ID!): Boolean
-}

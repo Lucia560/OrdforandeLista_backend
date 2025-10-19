@@ -1,5 +1,7 @@
 package com.example.OrdforandeLista.service;
 
+import com.example.OrdforandeLista.dto.TagDTO;
+import com.example.OrdforandeLista.dto.UserProfileDTO;
 import com.example.OrdforandeLista.entities.Tag;
 import com.example.OrdforandeLista.entities.UserProfile;
 import com.example.OrdforandeLista.input.RegisterUserProfileInput;
@@ -8,7 +10,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -22,11 +26,28 @@ public class UserProfileService {
         this.tagService = tagService;
     }
 
-    public UserProfile registerUser(RegisterUserProfileInput input) {
-        // Map keyCompetencyIds -> Set<Tag>
-        Set<Tag> competencies = new HashSet<>(tagService.getTagsByIds(input.keyCompetencyIds()));
 
-        UserProfile user = UserProfile.builder()
+    public void deleteUser(Long userId) {
+        if (!userProfileRepository.existsById(userId)) {
+            throw new IllegalArgumentException("User with ID " + userId + " does not exist");
+        }
+        userProfileRepository.deleteById(userId);
+    }
+
+    public UserProfileDTO registerUser(RegisterUserProfileInput input) {
+        // Get TagDTOs from service
+        List<TagDTO> tagDTOList = tagService.getTagsByIds(input.keyCompetencyIds());
+
+        // Convert TagDTOs to Tag entities
+        Set<Tag> competencies = tagDTOList.stream()
+                .map(dto -> Tag.builder()
+                        .tagId(dto.getTagId())
+                        .name(dto.getName())
+                        .build())
+                .collect(Collectors.toSet());
+
+        UserProfile user = UserProfile
+                .builder()
                 .firstName(input.firstName())
                 .lastName(input.lastName())
                 .email(input.email())
@@ -40,25 +61,19 @@ public class UserProfileService {
                 .leadershipEducationDescription(input.leadershipEducationDescription())
                 .boardRoles(input.boardRoles())
                 .companyTypes(input.companyTypes())
-                .keyCompetencies(competencies)      // <— mapped Set<Tag>
                 .boardExperienceYears(input.boardExperienceYears())
                 .executiveExperienceYears(input.executiveExperienceYears())
                 .leadershipExperienceYears(input.leadershipExperienceYears())
                 .agreedToTerms(input.agreedToTerms())
+                .keyCompetencies(competencies)
                 .build();
 
-        return userProfileRepository.save(user);
+        UserProfile savedUser = userProfileRepository.save(user);
+        return UserProfileDTO.fromEntity(savedUser); // <- Convert entity to DTO here
     }
 
-    public void deleteUser(Long userId) {
-        if (!userProfileRepository.existsById(userId)) {
-            throw new IllegalArgumentException("User with ID " + userId + " does not exist");
-        }
-        userProfileRepository.deleteById(userId);
-    }
-
-    public UserProfile updateUser(Long userId, RegisterUserProfileInput input) {
-        return userProfileRepository.findById(userId).map(user -> {
+    public UserProfileDTO updateUser(Long userId, RegisterUserProfileInput input) {
+        UserProfile updatedUser = userProfileRepository.findById(userId).map(user -> {
             user.setFirstName(input.firstName());
             user.setLastName(input.lastName());
             user.setEmail(input.email());
@@ -77,21 +92,14 @@ public class UserProfileService {
             user.setLeadershipExperienceYears(input.leadershipExperienceYears());
             user.setAgreedToTerms(input.agreedToTerms());
 
-            // Map keyCompetencyIds -> Set<Tag>
-            Set<Tag> competencies = new HashSet<>(tagService.getTagsByIds(input.keyCompetencyIds()));
-            user.setKeyCompetencies(competencies);
+           Set<TagDTO> competencies = new HashSet<>(tagService.getTagsByIds(input.keyCompetencyIds()));
+
+            user.setKeyCompetencies(competencies.stream().map(TagDTO::toEntity).collect(Collectors.toSet()));
 
             return userProfileRepository.save(user);
         }).orElseThrow(() ->
                 new IllegalArgumentException("User with ID " + userId + " does not exist"));
+
+        return UserProfileDTO.fromEntity(updatedUser);
     }
 }
-
-
-
-
-
-
-
-
-
