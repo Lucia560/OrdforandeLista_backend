@@ -1,5 +1,6 @@
 package com.example.OrdforandeLista.resolvers;
 
+import com.example.OrdforandeLista.dto.UserProfileDTO;
 import com.example.OrdforandeLista.entities.UserProfile;
 import com.example.OrdforandeLista.input.RegisterUserProfileInput;
 import com.example.OrdforandeLista.service.TagService;
@@ -24,12 +25,12 @@ public class UserProfileMutation {
     }
 
     @MutationMapping(name = "createUser")
-    public UserProfile createUser(@Argument RegisterUserProfileInput input) {
+    public UserProfileDTO createUser(@Argument RegisterUserProfileInput input) {
         return userProfileService.registerUser(input);
     }
 
     @MutationMapping
-    public UserProfile updateUser(@Argument Long userId, @Argument RegisterUserProfileInput input) {
+    public UserProfileDTO updateUser(@Argument Long userId, @Argument RegisterUserProfileInput input) {
         return userProfileService.updateUser(userId, input);
     }
 

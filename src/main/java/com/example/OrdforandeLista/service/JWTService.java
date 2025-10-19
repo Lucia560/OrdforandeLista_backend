@@ -1,6 +1,7 @@
 package com.example.OrdforandeLista.service;
 
 
+import com.example.OrdforandeLista.entities.AdminUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -15,8 +16,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
-// I have to generate the key and the token!!  and to change to admin check not user roles
 
 @Service
 public class JWTService {
@@ -56,9 +55,13 @@ public class JWTService {
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+        if (userDetails instanceof AdminUser adminUser) {
+            extraClaims.put("role", adminUser.getRole());
+            extraClaims.put("id", adminUser.getId());
+        }
         return Jwts
                 .builder()
-                .setClaims(extraClaims) // I need to use the role admin here !!!!!!
+                .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) // 1 day
