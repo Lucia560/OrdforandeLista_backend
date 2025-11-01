@@ -115,8 +115,6 @@
             <version>5.2.0</version>
             <scope>test</scope>
         </dependency>
-
-
         <dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
@@ -169,8 +167,7 @@
 							<version>1.5.5.Final</version>
 						</path>
 					</annotationProcessorPaths>
-
-				</configuration>
+                </configuration>
 			</plugin>
 			<plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -184,6 +181,25 @@
 					</excludes>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
