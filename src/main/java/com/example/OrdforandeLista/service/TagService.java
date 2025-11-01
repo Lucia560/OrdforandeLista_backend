@@ -22,7 +22,7 @@ public class TagService {
         this.tagMapper = tagMapper;
     }
 
-    // ✅ CREATE
+
     public TagDTO createTag(TagDTO tagDto) {
         if (tagRepository.existsByName(tagDto.getName())) {
             throw new IllegalArgumentException("Tag with name '" + tagDto.getName() + "' already exists");
@@ -33,7 +33,7 @@ public class TagService {
         return tagMapper.toDto(savedTag);
     }
 
-    // ✅ DELETE
+
     public void deleteTag(Long tagId) {
         if (!tagRepository.existsById(tagId)) {
             throw new IllegalArgumentException("Tag with ID '" + tagId + "' does not exist");
@@ -41,7 +41,7 @@ public class TagService {
         tagRepository.deleteById(tagId);
     }
 
-    // ✅ UPDATE
+
     public TagDTO updateTag(Long tagId, TagDTO tagDto) {
         return tagRepository.findById(tagId).map(existingTag -> {
             Tag updatedTag = tagMapper.updateEntityFromDto(existingTag, tagDto);
@@ -49,7 +49,7 @@ public class TagService {
         }).orElseThrow(() -> new IllegalArgumentException("Could not find tag with ID: " + tagId));
     }
 
-    // ✅ GET BY IDS
+
     public List<TagDTO> getTagsByIds(List<Long> ids) {
         if (ids == null || ids.isEmpty()) return List.of();
 

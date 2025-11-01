@@ -4,6 +4,7 @@ package com.example.OrdforandeLista.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.Instant;
@@ -13,6 +14,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @Table(name = "refresh_token")
 public class RefreshToken {
 
@@ -25,6 +27,7 @@ public class RefreshToken {
     private String refreshToken;
 
     @Column(nullable = false)
+    @NotNull(message = "Expiration time is required")
     private Instant expirationTime;
 
     @OneToOne(fetch = FetchType.LAZY)

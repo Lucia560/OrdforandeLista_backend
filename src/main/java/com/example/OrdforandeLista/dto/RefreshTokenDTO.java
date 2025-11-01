@@ -21,7 +21,7 @@ public class RefreshTokenDTO {
     private String refreshToken;
 
     @NotNull(message = "Expiration time is required")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Instant expirationTime;
 
     private Long adminUserId;

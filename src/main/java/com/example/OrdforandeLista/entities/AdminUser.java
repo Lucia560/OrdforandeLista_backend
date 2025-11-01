@@ -57,8 +57,9 @@ public class AdminUser implements UserDetails {
     // Spring Security methods
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "ADMIN");
+        return List.of(() -> "ROLE_ADMIN");
     }
+
 
     @Override
     public String getPassword() {
@@ -70,17 +71,23 @@ public class AdminUser implements UserDetails {
     { return email;
     }
 
-    //inkapsulering, is final corect?
-    private final boolean isAccountNonExpired = true;
-    private final  boolean isAccountNonLocked = true;
-    private final  boolean isCredentialsNonExpired = true;
-    private final  boolean isEnabled = true;
+    @Transient
+    private boolean accountNonExpired = true;
+
+    @Transient
+    private boolean accountNonLocked = true;
+
+    @Transient
+    private boolean credentialsNonExpired = true;
+
+    @Transient
+    private boolean enabled = true;
+
+    @Override public boolean isAccountNonExpired() { return accountNonExpired; }
+    @Override public boolean isAccountNonLocked() { return accountNonLocked; }
+    @Override public boolean isCredentialsNonExpired() { return credentialsNonExpired; }
+    @Override public boolean isEnabled() { return enabled; }
 
 
-
-    @Override public boolean isAccountNonExpired() { return isAccountNonExpired; }
-    @Override public boolean isAccountNonLocked() { return isAccountNonLocked; }
-    @Override public boolean isCredentialsNonExpired() { return isCredentialsNonExpired; }
-    @Override public boolean isEnabled() { return isEnabled; }
 
 }

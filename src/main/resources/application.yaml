@@ -31,7 +31,7 @@ logging:
     com.example.OrdforandeLista: DEBUG
 
 jwt:
-  secret: your-256-bit-secret-make-it-very-secure
+  secret: ${JWT_SECRET}
   expiration-ms: 86400000
   refresh-expiration-ms: 604800000
 
