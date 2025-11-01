@@ -79,8 +79,10 @@ public class UserProfileDTO {
     @Min(value = 0, message = "Leadership experience years cannot be negative")
     private Integer leadershipExperienceYears;
 
+    @NotNull(message = "You must agree to the terms and conditions")
     @AssertTrue(message = "You must agree to the terms and conditions")
     private Boolean agreedToTerms;
+
 
     private Set<Tag> keyCompetencies = new HashSet<>();
 

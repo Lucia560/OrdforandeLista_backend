@@ -28,7 +28,7 @@ public class RefreshTokenService {
         RefreshToken refreshToken = adminUser.getRefreshToken();
 
         if (refreshToken == null) {
-            long refreshTokenValidity = 5 * 60 * 60 * 10000;
+            long refreshTokenValidity = (long)5 * 60 * 60 * 10000;
             refreshToken = RefreshToken.builder()
                     .refreshToken(UUID.randomUUID().toString())
                     .expirationTime(Instant.now().plusMillis(refreshTokenValidity))

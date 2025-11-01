@@ -1,11 +1,3 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Java CI with Maven
 
 on:
@@ -14,7 +6,7 @@ on:
   pull_request:
     branches: [ "main" ]
     types: [opened, synchronize, reopened]
-    
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,26 +20,25 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build and analyze with Sonar
+      - name: Build, Test and Analyze with SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=Lucia560_OrdforandeLista_backend \
-          -Dsonar.organization=lucia560 \
-          -Dsonar.host.url=https://sonarcloud.io
-
-
+          mvn clean verify \
+            org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.projectKey=Lucia560_OrdforandeLista_backend \
+            -Dsonar.organization=lucia560 \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          version: latest
+          driver: docker-container
 
       - name: Build Docker image
         run: docker build -t ordforandelista-backend .
 
       - name: Update dependency graph
         uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
-
-
-    # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    
